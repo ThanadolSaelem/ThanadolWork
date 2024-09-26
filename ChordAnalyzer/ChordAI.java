@@ -1,4 +1,5 @@
 package ChordAnalyzer;
+
 import java.io.File;
 import java.util.*;
 import javax.sound.midi.InvalidMidiDataException;
@@ -10,11 +11,9 @@ import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
 
 public class ChordAI {
-    private static Set<Integer> currentNotes = new HashSet<>();
+    private static List<Integer> currentNotes = new ArrayList<>();
 
-    public static void main(String[] args) {
-        String midiFilePath = "C:/Users/Mynew/Downloads/chords.mid";
-
+    public void analyzeMidiFile(String midiFilePath) {
         try {
             Sequence sequence = MidiSystem.getSequence(new File(midiFilePath));
 
@@ -57,7 +56,11 @@ public class ChordAI {
         }
     }
 
-    private static String identifyChord() {
+    public static List<Integer> getCurrentNotes() {
+        return currentNotes;
+    }
+
+    public static String identifyChord() {
         for (Map.Entry<String, int[]> entry : Chord.getChordsList().entrySet()) {
             boolean isChord = true;
             for (int note : entry.getValue()) {

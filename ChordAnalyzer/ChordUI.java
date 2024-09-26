@@ -5,7 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiEvent;
+import javax.sound.midi.MidiMessage;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.ShortMessage;
+import javax.sound.midi.Track;
 public class ChordUI {
     private JFrame frame;
     private JTextField filePathField;
@@ -86,22 +92,21 @@ public class ChordUI {
 
                                 if (sm.getCommand() == ShortMessage.NOTE_ON) {
                                     int note = sm.getData1();
-                                    int velocity = sm.getData2();
 
                                     // Add note to current notes
-                                    ChordAI.currentNotes.add(note % 12);
+                                    ChordAI.getCurrentNotes().add(note % 12);
 
                                     // Identify the chord based on the current notes
                                     String chord = ChordAI.identifyChord();
                                     if (chord != null) {
                                         chordsTextArea.append("Chord: " + chord + "\n");
                                         // Reset current notes after identifying a chord
-                                        ChordAI.currentNotes.clear();
+                                        ChordAI.getCurrentNotes().clear();
                                     }
                                 } else if (sm.getCommand() == ShortMessage.NOTE_OFF) {
                                     int note = sm.getData1();
                                     // Remove note from current notes
-                                    ChordAI.currentNotes.remove(note % 12);
+                                    ChordAI.getCurrentNotes().remove(note % 12);
                                 }
                             }
                         }
