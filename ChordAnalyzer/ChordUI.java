@@ -27,7 +27,7 @@ public class ChordUI {
         frame = new JFrame("Chord Analyzer");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-
+    
         // Create panel for file path and open file button
         JPanel filePathPanel = new JPanel();
         filePathPanel.setLayout(new FlowLayout());
@@ -36,7 +36,7 @@ public class ChordUI {
         openFileButton.addActionListener(new OpenFileActionListener());
         filePathPanel.add(filePathField);
         filePathPanel.add(openFileButton);
-
+    
         // Create panel for analyze button and chords text area
         JPanel analyzePanel = new JPanel();
         analyzePanel.setLayout(new BorderLayout());
@@ -47,11 +47,24 @@ public class ChordUI {
         chordsTextArea.setEditable(false);
         analyzePanel.add(analyzeButton, BorderLayout.NORTH);
         analyzePanel.add(new JScrollPane(chordsTextArea), BorderLayout.CENTER);
-
+    
+        // Create panel for clear button
+        JPanel clearPanel = new JPanel();
+        clearPanel.setLayout(new FlowLayout());
+        JButton clearButton = new JButton("Clear");
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                chordsTextArea.setText("");
+            }
+        });
+        clearPanel.add(clearButton);
+    
         // Add panels to frame
         frame.add(filePathPanel, BorderLayout.NORTH);
         frame.add(analyzePanel, BorderLayout.CENTER);
-
+        frame.add(clearPanel, BorderLayout.SOUTH);
+    
         frame.pack();
         frame.setVisible(true);
     }
@@ -78,7 +91,7 @@ public class ChordUI {
             if (midiFilePath != null && !midiFilePath.isEmpty()) {
                 try {
                     Sequence sequence = MidiSystem.getSequence(new File(midiFilePath));
-
+    
                     // Iterate over tracks
                     Track[] tracks = sequence.getTracks();
                     for (Track track : tracks) {
@@ -86,27 +99,26 @@ public class ChordUI {
                         for (int i = 0; i < track.size(); i++) {
                             MidiEvent event = track.get(i);
                             MidiMessage message = event.getMessage();
-
+    
                             if (message instanceof ShortMessage) {
                                 ShortMessage sm = (ShortMessage) message;
-
+    
                                 if (sm.getCommand() == ShortMessage.NOTE_ON) {
                                     int note = sm.getData1();
-
+    
                                     // Add note to current notes
                                     ChordAI.getCurrentNotes().add(note % 12);
-
+    
                                     // Identify the chord based on the current notes
                                     String chord = ChordAI.identifyChord();
                                     if (chord != null) {
                                         chordsTextArea.append("Chord: " + chord + "\n");
-                                        // Reset current notes after identifying a chord
-                                        ChordAI.getCurrentNotes().clear();
                                     }
                                 } else if (sm.getCommand() == ShortMessage.NOTE_OFF) {
                                     int note = sm.getData1();
+    
                                     // Remove note from current notes
-                                    ChordAI.getCurrentNotes().remove(note % 12);
+                                    ChordAI.getCurrentNotes().remove((Integer) (note % 12));
                                 }
                             }
                         }
