@@ -1,4 +1,3 @@
-package ChordAnalyzer;
 import java.io.File;
 import java.util.*;
 import javax.sound.midi.InvalidMidiDataException;
