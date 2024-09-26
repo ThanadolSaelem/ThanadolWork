@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+* {
+  font-family: "Press Start 2P", sans-serif;
+  font-size: small;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #c1e4ee;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  flex-grow: 1;
+  margin: 1rem 1rem;
+}
+
+.search-button {
+  width: 10rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: #200f5e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 1rem 1rem;
+}
+
+.countries {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.country {
+  width: 30%;
+  margin-bottom: 2rem;
+  background-color: #f2f2f2;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.country:hover {
+  transform: translateY(-5px);
+}
+
+.country_img {
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  object-fit: cover;
+  height: 200px;
+}
+
+.country_data {
+  display: flex;
+  flex-direction: column;
+}
+
+.country_name {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.country_region {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.country_row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.country_row span {
+  font-size: 1.3rem;
+  margin-right: 0.5rem;
+}
+
+.region_btn {
+  width: 10rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: #200f5e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 1rem 1rem;
+}
+
+.clear_btn {
+  width: 10rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: #21dc30;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 1rem 1rem;
+}
+
+#regionlabel {
+  margin: 0rem 3rem;
+}
+
+.result {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.result > * {
+  width: calc(30% - 5px);
+  margin: 10px;
+}

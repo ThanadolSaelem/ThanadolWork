@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Reservation</title>
+  <body>
+    <div class="container">
+      <h1>&nbsp;Booking<br>&nbsp;Web</h1>
+      <form id="reserveForm">
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Name"
+          required
+        />
+        <br />
+        <input
+          type="date"
+          id="date"
+          name="date"
+          min="[today's date]"
+          placeholder="Date"
+          required
+        />
+        <br />
+        <input
+          type="text"
+          id="time"
+          name="time"
+          list="times"
+          placeholder="Time"
+          required
+        />
+        <datalist id="times">
+          <option value="9:00 AM - 10:00 PM" />
+          <option value="10:00 AM - 11:00 PM" />
+          <option value="11:00 AM - 12:00 PM" />
+          <option value="13:00 PM - 14:00 PM" />
+        </datalist>
+        <br />
+        <input
+          type="number"
+          id="people"
+          name="people"
+          min="1"
+          max="10"
+          placeholder="Number of seats"
+          required
+        />
+        <br />
+        <input type="submit" value="Reserve" id="reserveButton" />
+      </form>
+      <div id="reservations"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
